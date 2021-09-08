@@ -1,0 +1,8 @@
+.elem {
+  margin-top: 10px;  
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border: 2px solid brown;
+  align-items: center;
+}
