@@ -1,4 +1,9 @@
-.App{
-    width: 70%;
-    margin: 0 auto;
+.App {
+  width: 70%;
+  margin: 0 auto;
+}
+.formAddInput {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }

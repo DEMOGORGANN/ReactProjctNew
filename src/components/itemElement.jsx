@@ -4,11 +4,11 @@ import React from "react";
 //import style
 import "./../styles/styleElement.css";
 
-function ItemElement({post}) {
+function ItemElement({ post, number }) {
   return (
     <div className="elem">
       <div className="description">
-        <strong>{post.id}){post.title}</strong>
+        <strong>{number + 1}){post.title}</strong>
         <div>{post.body}</div>
       </div>
       <button>Удалить</button>
