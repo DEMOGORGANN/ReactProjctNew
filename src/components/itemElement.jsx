@@ -1,17 +1,25 @@
 //import react
 import React from "react";
 
+//import components
+import MyButton from "./UI/MyButton";
 //import style
-import "./../styles/styleElement.css";
+import "./../styles/stylePosts.css";
 
-function ItemElement({ post, number }) {
+function ItemElement({ post, number, chechIdElements }) {
+
+  function chechClickForDelete(e) {
+    e.preventDefault();
+    chechIdElements(post.id);
+  }
+
   return (
     <div className="elem">
       <div className="description">
         <strong>{number + 1}){post.title}</strong>
         <div>{post.body}</div>
       </div>
-      <button>Удалить</button>
+      <MyButton onClick={chechClickForDelete}>Удалить</MyButton>
     </div>
   );
 }

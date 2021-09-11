@@ -3,8 +3,7 @@ import React, { useState } from "react";
 
 //import components
 import PostsItem from "./components/PostsItem";
-import MyButton from "./components/UI/MyButton";
-import MyInput from "./components/UI/MyInput";
+import FormItem from "./components/formItem";
 
 //import css
 import "./styles/app.css"
@@ -19,36 +18,32 @@ function App() {
     { id: 1631203453455765, title: "JavaScript3", body: "Description3" },
   ])
 
+
   const [post, setPost] = useState({ title: "", body: "" });
+
+  const checkIdInState = (idElement) => {
+    posts.forEach((item, i) => {
+      if (item.id === idElement) {
+        setPosts(posts.slice(0, i).concat(posts.slice(i + 1)))
+      }
+    })
+  }
 
 
 
   const AddInputInState = (e) => {
     e.preventDefault();
-    setPosts([...posts, { ...post, id: Date.now() }])
-    setPost({ title: "", body: "" })
+    if (post.title && post.body) {
+      setPosts([...posts, { ...post, id: Date.now() }])
+      setPost({ title: "", body: "" })
+    }
   }
+
 
   return (
     <div className="App">
-      <form className="formAddInput">
-        <MyInput
-          type="text"
-          placeholder="Тема"
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
-        />
-        <MyInput
-          type="text"
-          placeholder="Описание"
-          onChange={(e) => setPost({ ...post, body: e.target.value })}
-        />
-        <MyButton
-          onClick={AddInputInState}
-        >Добавить</MyButton>
-      </form>
-      <div>
-        <PostsItem post={posts} titles="Компоненты JAVA-SCRIPT" dataBase={posts}/>
-      </div>
+      <FormItem AddInputInState={AddInputInState} setPost={setPost} post={post} />
+      <PostsItem post={posts} titles="Компоненты JAVA-SCRIPT" dataBase={posts} checkIdInState={checkIdInState} />
     </div>
   );
 }

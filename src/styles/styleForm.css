@@ -1,0 +1,7 @@
+.formAddInput {
+  display: flex;
+  flex-direction: column;
+}
+.borderRed{
+  border: 2px solid #FA8072;
+}

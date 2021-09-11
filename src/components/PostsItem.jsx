@@ -1,19 +1,23 @@
 //import react
 import React from "react";
 
-//import style
-import "./../styles/styleElement.css";
-
 //import components
 import ItemElement from "./../components/itemElement";
 
-function PostsItem({ post , titles}) {
+function PostsItem({ post, titles, checkIdInState}) {
+
+
+    function chechIdElements(idElement) {
+        checkIdInState(idElement)
+    }
+
+
     return (
         <div>
             <h2>{titles}</h2>
             {post.map((post, index) =>
-                <ItemElement post={post} key={post.id} number={index}/>
-            )}
+                <ItemElement post={post} key={post.id} number={index} chechIdElements={chechIdElements}/>
+            ).reverse()}
         </div>
     );
 }
