@@ -9,10 +9,11 @@ import MyInput from "./UI/MyInput";
 //import css
 import "./../styles/styleForm.css"
 
-export default function FormItem({ AddInputInState, setPost, post }) {
+export default function FormItem({ addElemInDB }) {
 
 
-    const [born, setBord] = useState(true)
+    const [bord, setBord] = useState(true)
+    const [post, setPost] = useState({ title: "", body: "", id: "" });
 
 
     const handleClick = (e) => {
@@ -20,8 +21,16 @@ export default function FormItem({ AddInputInState, setPost, post }) {
         if (post.title && post.body) {
             setBord(true);
         }
-
         AddInputInState(e);
+    }
+
+
+    const AddInputInState = (e) => {
+        e.preventDefault();
+        if (post.title && post.body) {
+            addElemInDB(post)
+            setPost({ title: "", body: "" })
+        }
     }
 
     return (
@@ -30,14 +39,14 @@ export default function FormItem({ AddInputInState, setPost, post }) {
                 value={post.title}
                 type="text"
                 placeholder="Тема"
-                className={post.title || born ? 'nice' : 'borderRed'}
-                onChange={(e) => setPost({ ...post, title: e.target.value })}
+                className={post.title || bord ? 'nice' : 'borderRed'}
+                onChange={(e) => setPost({ ...post, title: e.target.value, id: Date.now() })}
             />
             <MyInput
                 value={post.body}
                 type="text"
                 placeholder="Описание"
-                className={post.body || born ? 'nice' : 'borderRed'}
+                className={post.body || bord ? 'nice' : 'borderRed'}
                 onChange={(e) => setPost({ ...post, body: e.target.value })}
             />
             <MyButton

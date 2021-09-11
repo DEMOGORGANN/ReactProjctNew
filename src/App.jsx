@@ -7,7 +7,6 @@ import FormItem from "./components/formItem";
 
 //import css
 import "./styles/app.css"
-// import './../../styles/MyInput.css'
 
 
 function App() {
@@ -18,32 +17,19 @@ function App() {
     { id: 1631203453455765, title: "JavaScript3", body: "Description3" },
   ])
 
-
-  const [post, setPost] = useState({ title: "", body: "" });
-
-  const checkIdInState = (idElement) => {
-    posts.forEach((item, i) => {
-      if (item.id === idElement) {
-        setPosts(posts.slice(0, i).concat(posts.slice(i + 1)))
-      }
-    })
+  const addElemInDB = (post) => {
+    setPosts([...posts, { ...post }])
   }
 
-
-
-  const AddInputInState = (e) => {
-    e.preventDefault();
-    if (post.title && post.body) {
-      setPosts([...posts, { ...post, id: Date.now() }])
-      setPost({ title: "", body: "" })
-    }
+  const deleteElemInDB = (incriment) => {
+    setPosts(posts.slice(0, incriment).concat(posts.slice(incriment + 1)))
   }
 
 
   return (
     <div className="App">
-      <FormItem AddInputInState={AddInputInState} setPost={setPost} post={post} />
-      <PostsItem post={posts} titles="Компоненты JAVA-SCRIPT" dataBase={posts} checkIdInState={checkIdInState} />
+      <FormItem addElemInDB={addElemInDB} />
+      <PostsItem titles="Компоненты JAVA-SCRIPT" dataBase={posts} deleteElemInDB={deleteElemInDB} setPosts={setPosts} />
     </div>
   );
 }
