@@ -19,15 +19,6 @@ export default function PostsItem({ dataBase, titles, deleteElemInDB }) {
         }
     }, [dataBase, flag])
 
-    function chechIdElements(idElement) {
-        newDB.forEach((item, i) => {
-            if (item.id === idElement) {
-                deleteElemInDB(i)
-            }
-        })
-    }
-
-
     const searhElem = (e) => {
         const value = e.target.value;
         if (value) {
@@ -40,18 +31,26 @@ export default function PostsItem({ dataBase, titles, deleteElemInDB }) {
         }
     }
 
+    function chechIdElements(idElement) {
+        deleteElemInDB(idElement)
+    }
+
 
     return (
         <div>
             <h2>{titles}</h2>
             <MySeach type="text" placeholder="Поиск..." onChange={searhElem} />
-            {newDB.map((post, index) =>
-                < ItemElement
-                    post={post}
-                    key={post.id}
-                    number={index}
-                    chechIdElements={chechIdElements}
-                />).reverse()}
+            {newDB.length === 0
+                ? <h1 style={{ textAlign: "center" }}>Посты не найдены</h1>
+                : newDB.map((post, index) =>
+                    < ItemElement
+                        post={post}
+                        key={post.id}
+                        number={index}
+                        chechIdElements={chechIdElements}
+                    />).reverse()
+
+            }
         </div>
     );
 }

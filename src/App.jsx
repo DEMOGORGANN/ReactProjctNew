@@ -4,9 +4,11 @@ import React, { useState } from "react";
 //import components
 import PostsItem from "./components/PostsItem";
 import FormItem from "./components/formItem";
+import MyModal from "./components/UI/MyModal";
 
 //import css
 import "./styles/app.css"
+
 
 
 function App() {
@@ -17,18 +19,27 @@ function App() {
     { id: 1631203453455765, title: "JavaScript3", body: "Description3" },
   ])
 
+  const [modal, setModal] = useState(false);
+
   const addElemInDB = (post) => {
     setPosts([...posts, { ...post }])
   }
 
-  const deleteElemInDB = (incriment) => {
-    setPosts(posts.slice(0, incriment).concat(posts.slice(incriment + 1)))
+  const deleteElemInDB = (id) => {
+    setPosts(posts.filter(post => post.id !== id))
   }
 
 
   return (
     <div className="App">
-      <FormItem addElemInDB={addElemInDB} />
+      <button onClick={() => setModal(true)}>Добавить пост</button>
+
+      <MyModal
+        setVisible={setModal}
+        visible={modal}>
+        <FormItem addElemInDB={addElemInDB} setModal={setModal} />
+      </MyModal>
+
       <PostsItem titles="Компоненты JAVA-SCRIPT" dataBase={posts} deleteElemInDB={deleteElemInDB} setPosts={setPosts} />
     </div>
   );

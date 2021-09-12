@@ -9,7 +9,7 @@ import MyInput from "./UI/MyInput";
 //import css
 import "./../styles/styleForm.css"
 
-export default function FormItem({ addElemInDB }) {
+export default function FormItem({ addElemInDB, setModal }) {
 
 
     const [bord, setBord] = useState(true)
@@ -30,6 +30,7 @@ export default function FormItem({ addElemInDB }) {
         if (post.title && post.body) {
             addElemInDB(post)
             setPost({ title: "", body: "" })
+            setModal(false)
         }
     }
 
