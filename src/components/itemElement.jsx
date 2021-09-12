@@ -15,7 +15,7 @@ function ItemElement({ post, number, chechIdElements }) {
 
   return (
     <div className="elem">
-      <div className="description">
+      <div>
         <strong>{number + 1}){post.title}</strong>
         <div>{post.body}</div>
       </div>

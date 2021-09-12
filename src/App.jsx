@@ -1,5 +1,6 @@
 //import react
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 //import components
 import PostsItem from "./components/PostsItem";
@@ -12,13 +13,7 @@ import "./styles/app.css"
 
 
 function App() {
-  const [posts, setPosts] = useState([
-    { id: 163120654353023476, title: "JavaScript", body: "Description" },
-    { id: 1234323123453456690576, title: "JavaScript1", body: "Description1" },
-    { id: 1631254690236, title: "JavaScript2", body: "Description2" },
-    { id: 1631203453455765, title: "JavaScript3", body: "Description3" },
-  ])
-
+  const [posts, setPosts] = useState("")
   const [modal, setModal] = useState(false);
 
   const addElemInDB = (post) => {
@@ -29,6 +24,14 @@ function App() {
     setPosts(posts.filter(post => post.id !== id))
   }
 
+  const fetchGetPost = async () => {
+    const responce = await axios.get("https://jsonplaceholder.typicode.com/posts")
+    setPosts(responce.data)
+  }
+
+  useEffect(() => {
+    fetchGetPost()
+  }, [])
 
   return (
     <div className="App">
