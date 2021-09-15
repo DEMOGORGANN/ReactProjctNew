@@ -1,0 +1,21 @@
+.post {
+  text-align: center;
+}
+.titles {
+  font-size: 40px;
+}
+.body {
+  font-weight: normal;
+}
+.comments {
+  margin-top: 150px;
+}
+.separateComponent {
+  margin-top: 30px;
+}
+h3 {
+  font-weight: normal;
+}
+h4 {
+  font-weight: normal;
+}

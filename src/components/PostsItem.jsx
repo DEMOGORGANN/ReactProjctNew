@@ -4,13 +4,17 @@ import React, { useState, useEffect } from "react";
 //import components
 import ItemElement from "./../components/itemElement";
 import MySeach from "./UI/MySeach";
+import FormItem from "./formItem";
+import MyModal from "./UI/MyModal";
+import MyButton from "./UI/MyButton";
 
-export default function PostsItem({ dataBase, titles, deleteElemInDB }) {
+export default function PostsItem({ dataBase, titles, deleteElemInDB, addElemInDB, transferNumber }) {
 
 
     //костыль ввиде флага для поиска в списке
     const [flag, setFlag] = useState(true);
     const [newDB, setDB] = useState(dataBase)
+    const [modal, setModal] = useState(false);
 
 
     useEffect(() => {
@@ -38,18 +42,26 @@ export default function PostsItem({ dataBase, titles, deleteElemInDB }) {
 
     return (
         <div>
+            <MyButton onClick={() => setModal(true)}>Добавить пост</MyButton>
+            <MyModal
+                setVisible={setModal}
+                visible={modal}>
+                <FormItem addElemInDB={addElemInDB} setModal={setModal} />
+            </MyModal>
             <h2>{titles}</h2>
             <MySeach type="text" placeholder="Поиск..." onChange={searhElem} />
             {newDB.length === 0
                 ? <h1 style={{ textAlign: "center" }}>Посты не найдены</h1>
                 : newDB.map((post, index) =>
+
                     < ItemElement
                         post={post}
                         key={post.id}
                         number={index}
                         chechIdElements={chechIdElements}
-                    />).reverse()
-
+                        transferNumber={transferNumber}
+                    />
+                )
             }
         </div>
     );

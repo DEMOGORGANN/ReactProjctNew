@@ -1,4 +1,4 @@
-button {
+.buttonss {
   background-color: #008cba; /* Green */
   border: none;
   color: white;
@@ -9,4 +9,5 @@ button {
   cursor: pointer;
   height: 50px;
   font-size: 20px;
+  margin-right: 10px;
 }

@@ -1,11 +1,19 @@
 //import react
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 //import components
 import PostsItem from "./components/PostsItem";
-import FormItem from "./components/formItem";
-import MyModal from "./components/UI/MyModal";
+import AboutUs from "./components/AboutUs"
+import NavBar from "./components/NavBar";
+import ErrorURL from "./components/ErrorURL";
+import PageElement from "./components/PageElement";
 
 //import css
 import "./styles/app.css"
@@ -14,7 +22,8 @@ import "./styles/app.css"
 
 function App() {
   const [posts, setPosts] = useState("")
-  const [modal, setModal] = useState(false);
+  const [numberId, transferNumber] = useState("")
+
 
   const addElemInDB = (post) => {
     setPosts([...posts, { ...post }])
@@ -34,17 +43,44 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <button onClick={() => setModal(true)}>Добавить пост</button>
+    <BrowserRouter>
+      <div className="App">
+        <NavBar />
 
-      <MyModal
-        setVisible={setModal}
-        visible={modal}>
-        <FormItem addElemInDB={addElemInDB} setModal={setModal} />
-      </MyModal>
+        <Switch>
+          <Route exact path="/">
+            sfdfsd
+          </Route>
 
-      <PostsItem titles="Компоненты JAVA-SCRIPT" dataBase={posts} deleteElemInDB={deleteElemInDB} setPosts={setPosts} />
-    </div>
+          <Route exact path="/posts">
+            <PostsItem
+              titles="Компоненты JAVA-SCRIPT"
+              dataBase={posts}
+              deleteElemInDB={deleteElemInDB}
+              setPosts={setPosts}
+              addElemInDB={addElemInDB}
+              transferNumber={transferNumber}
+            />
+          </Route>
+
+          <Route path="/about">
+            <AboutUs />
+          </Route>
+
+          <Route path="/error">
+            <ErrorURL />
+          </Route>
+
+          <Route exact path="/post/:id">
+            <PageElement numberId={numberId}/>
+          </Route>
+
+
+          <Redirect to="/error" />
+        </Switch>
+
+      </div>
+    </BrowserRouter>
   );
 }
 
