@@ -52,8 +52,8 @@ function App() {
       setIsAuth
     }}>
       <BrowserRouter>
+        <NavBar />
         <div className="App">
-          <NavBar />
           {localStorage.auth
             ?
 

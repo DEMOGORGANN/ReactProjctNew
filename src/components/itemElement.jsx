@@ -27,8 +27,10 @@ function ItemElement({ post, number, chechIdElements, transferNumber }) {
         <strong>{number + 1}){post.title}</strong>
         <div>{post.body}</div>
       </div>
-      <MyButton onClick={() => clickForOpenElem()}>Открыть</MyButton>
-      <MyButton onClick={chechClickForDelete}>Удалить</MyButton>
+      <div className="btnAddDel">
+        <MyButton onClick={() => clickForOpenElem()}>Открыть</MyButton>
+        <MyButton onClick={chechClickForDelete}>Удалить</MyButton>
+      </div>
     </div>
   );
 }
